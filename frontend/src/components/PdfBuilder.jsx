@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { jsPDF } from "jspdf"
+import style from "./PdfBuilder.module.css"
 
 function PdfBuilder(params) {
 
@@ -7,16 +8,17 @@ function PdfBuilder(params) {
     const jspdf = new jsPDF()
 
     function renderHandler() {
+        console.log(source.current);
         jspdf.html(source.current, { callback: doc => doc.save() })
     }
 
     return (
         <>
-            <div ref={source}>
-                <h1>Cosas...</h1>
-                <p>Más cosas...</p>
+            <div ref={source} className={style.source}>
+                <h1>Documento a imprimir</h1>
+                <p>Contenido del documento.</p>
             </div>
-            <button onClick={renderHandler}>Render</button>
+            <button onClick={renderHandler}>Imprimir documento</button>
         </>
     )
 }
