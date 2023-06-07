@@ -11,9 +11,13 @@ function InputCheckbox({labelText, name, value, legislation}){
     };
 
     return(
-        <label>
-            {labelText}       
-            <input type="checkbox" onClick={handlerCheckLegislation} name={name} value={value} defaultChecked="false"/>
+        <label>     
+            <input type="checkbox" 
+                onClick={handlerCheckLegislation} 
+                name={name} 
+                value={value} 
+            />
+            {labelText}  
         </label>
     );
 };
