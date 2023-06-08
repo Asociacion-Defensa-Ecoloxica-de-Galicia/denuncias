@@ -1,13 +1,15 @@
-function InputCheckbox({labelText, name, value, legislation}){
+function InputCheckbox({labelText, name, value, legislation, setLegislation}){
 
     function handlerCheckLegislation(event){
         if (event.target.checked === true) {
-            legislation.add(event.target.value)
+            const newLegislation = new Set(legislation)
+            newLegislation.add(event.target.value)
+            setLegislation(newLegislation)
         } else if (event.target.checked === false){
-            legislation.delete(event.target.value)
+            const newLegislation = new Set(legislation)
+            newLegislation.delete(event.target.value)
+            setLegislation(newLegislation)
         }
-        console.log(legislation);
-        
     };
 
     return(

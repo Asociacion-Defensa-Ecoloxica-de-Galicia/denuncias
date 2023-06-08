@@ -1,3 +1,15 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 label, textarea{
     display: block;
+
+}
+
+fieldset {
+    margin: 0.5rem;
+    width: 60rem;
 }
