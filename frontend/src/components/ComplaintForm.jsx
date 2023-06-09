@@ -166,38 +166,20 @@ function ComplaintForm() {
                         <input type="radio" name="entidade"/>
                         CONSELLARÍA DE MEDIO RURAL, XEFATURA TERRITORIAL DE OURENSE   
                     </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DE LUGO
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DA CORUÑA
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DE PONTEVEDRA
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DE OURENSE
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL DE LUGO
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL DA CORUÑA
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL DE OURENSE
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL DE PONTEVEDRA
-                    </label>
+                    <fieldset>
+                        <legend>CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DE LUGO</legend>
+                        <input type="radio" name="entidade"/> LUGO
+                        <input type="radio" name="entidade"/> A CORUÑA
+                        <input type="radio" name="entidade"/> OURENSE
+                        <input type="radio" name="entidade"/> PONTEVEDRA
+                    </fieldset>
+                    <fieldset>
+                        <legend>CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL</legend>
+                        <input type="radio" name="entidade"/> LUGO
+                        <input type="radio" name="entidade"/> A CORUÑA
+                        <input type="radio" name="entidade"/> OURENSE
+                        <input type="radio" name="entidade"/> PONTEVEDRA
+                    </fieldset>
                 </fieldset>
                 <label>
                     <input type="checkbox" value="extra_doc"/>
