@@ -24,7 +24,7 @@ function ComplaintForm() {
                 </label>
 
                 <label>Asunto Relacionado
-                    <textarea cols="60" rows="10"></textarea>
+                    <input type="text" name="issue"/>
                 </label>
 
                 <label>Recentemente, membros de ADEGA detectaron:
