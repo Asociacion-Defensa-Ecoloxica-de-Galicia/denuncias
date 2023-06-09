@@ -133,7 +133,7 @@ function ComplaintForm() {
                     />
                 </fieldset>
                 <fieldset>
-                    <legend>Elixe a Entidade</legend>
+                    <legend>Elixe o destinatario</legend>
                     <label>
                         <input type="radio" name="entidade"/>
                         SERVIZO DE PROTECCIÓN DA NATUREZA (SEPRONA)
@@ -150,36 +150,29 @@ function ComplaintForm() {
                         <input type="radio" name="entidade"/>
                         CONSELLERÍA DE INFRAESTRUCTURAS E MOBILIDADE- AUGAS DE GALICIA                        
                     </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO RURAL, XEFATURA TERRITORIAL DE LUGO                       
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO RURAL, XEFATURA TERRITORIAL DA CORUÑA
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO RURAL, XEFATURA TERRITORIAL DE PONTEVEDRA
-                    </label>
-                    <label>
-                        <input type="radio" name="entidade"/>
-                        CONSELLARÍA DE MEDIO RURAL, XEFATURA TERRITORIAL DE OURENSE   
-                    </label>
+
                     <fieldset>
-                        <legend>CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA - XEFATURA TERRITORIAL DE LUGO</legend>
-                        <input type="radio" name="entidade"/> LUGO
-                        <input type="radio" name="entidade"/> A CORUÑA
-                        <input type="radio" name="entidade"/> OURENSE
-                        <input type="radio" name="entidade"/> PONTEVEDRA
-                    </fieldset>
-                    <fieldset>
-                        <legend>CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE - XEFATURA TERRITORIAL</legend>
-                        <input type="radio" name="entidade"/> LUGO
-                        <input type="radio" name="entidade"/> A CORUÑA
-                        <input type="radio" name="entidade"/> OURENSE
-                        <input type="radio" name="entidade"/> PONTEVEDRA
-                    </fieldset>
+                        <legend>Xefaturas territoriais</legend>
+                        <label>
+                            <input type="radio" name="entidade"/>
+                            CONSELLARÍA DE MEDIO RURAL
+                        </label>
+                        <label>
+                            <input type="radio" name="entidade"/>
+                            CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA
+                        </label>
+                        <label>
+                            <input type="radio" name="entidade"/>
+                            CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE
+                        </label>
+                        <fieldset>
+                            <legend>PROVINCIA</legend>
+                            <input type="radio" name="provincia"/> LUGO
+                            <input type="radio" name="provincia"/> A CORUÑA
+                            <input type="radio" name="provincia"/> OURENSE
+                            <input type="radio" name="provincia"/> PONTEVEDRA
+                        </fieldset>
+                    </fieldset>                    
                 </fieldset>
                 <label>
                     <input type="checkbox" value="extra_doc"/>
