@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { jsPDF } from "jspdf"
+import html2pdf from "html2pdf.js"
 import style from "./PdfBuilder.module.css"
 
 function PdfBuilder(params) {
@@ -7,9 +8,10 @@ function PdfBuilder(params) {
     const source = useRef()
     const jspdf = new jsPDF()
 
+    
+
     function renderHandler() {
-        console.log(source.current);
-        jspdf.html(source.current, { callback: doc => doc.save() })
+        html2pdf(source.current)
     }
 
     return (
