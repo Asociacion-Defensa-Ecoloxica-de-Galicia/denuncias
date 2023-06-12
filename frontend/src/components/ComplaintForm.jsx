@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 function ComplaintForm() {
 
     const [legislation, setLegislation ] = useState(new Set())
+    const [ institution, setInstitution ] = useState("")
+    const [ isTerritorial , setIsTerritorial ] = useState(false)
+    const [ province, setProvince ] = useState("")
 
     useEffect(
         ()=>{
@@ -15,16 +18,25 @@ function ComplaintForm() {
         [legislation]
     );
 
+    function formInputHandler(event){
+        const territorial = event.target.classList.contains("territorial")
+        if ( event.target.name === "institution" ) {
+            setInstitution(event.target.labels[0].innerText)
+            setIsTerritorial( territorial )
+            if ( ! territorial ) setProvince("")
+        }
+        if ( event.target.name === "province" ) setProvince(event.target.labels[0].innerText)
+    }
 
     return(
         <>
-            <form>
+            <form onInput={formInputHandler}>
                 <label>Codigo de ADEGA:
                         DF<input type="text"/>
                 </label>
 
                 <label>Asunto Relacionado
-                    <textarea cols="60" rows="10"></textarea>
+                    <input type="text" name="issue"/>
                 </label>
 
                 <label>Recentemente, membros de ADEGA detectaron:
@@ -135,43 +147,53 @@ function ComplaintForm() {
                 <fieldset>
                     <legend>Elixe o destinatario</legend>
                     <label>
-                        <input type="radio" name="entidade"/>
+                        <input type="radio" name="institution"/>
                         SERVIZO DE PROTECCIÓN DA NATUREZA (SEPRONA)
                     </label>
                     <label>
-                        <input type="radio" name="entidade"/>   
+                        <input type="radio" name="institution"/>   
                         POLICÍA AUTONÓMICA
                     </label>
                     <label>
-                        <input type="radio" name="entidade"/>
+                        <input type="radio" name="institution"/>
                         MINISTERIO PARA A TRANSICIÓN ECOLÓXICA E O RETO DEMOGRÁFICO, CONFEDERACIÓN HIDROGRÁFICA MIÑO SIL
                     </label>
                     <label>
-                        <input type="radio" name="entidade"/>
+                        <input type="radio" name="institution"/>
                         CONSELLERÍA DE INFRAESTRUCTURAS E MOBILIDADE- AUGAS DE GALICIA                        
                     </label>
 
                     <fieldset>
                         <legend>Xefaturas territoriais</legend>
                         <label>
-                            <input type="radio" name="entidade"/>
+                            <input className="territorial" type="radio" name="institution"/>
                             CONSELLARÍA DE MEDIO RURAL
                         </label>
                         <label>
-                            <input type="radio" name="entidade"/>
+                            <input className="territorial"  type="radio" name="institution"/>
                             CONSELLARÍA DE MEDIO AMBIENTE TERRITORIO E VIVENDA
                         </label>
                         <label>
-                            <input type="radio" name="entidade"/>
+                            <input className="territorial"  type="radio" name="institution"/>
                             CONSELLARÍA DE CULTURA, EDUCACIÓN E UNIVERSIDADE
                         </label>
+                        { isTerritorial && 
                         <fieldset>
-                            <legend>PROVINCIA</legend>
-                            <input type="radio" name="provincia"/> LUGO
-                            <input type="radio" name="provincia"/> A CORUÑA
-                            <input type="radio" name="provincia"/> OURENSE
-                            <input type="radio" name="provincia"/> PONTEVEDRA
+                            <legend>Provincia</legend>
+                            <label>
+                                <input type="radio" name="province"/> LUGO
+                            </label>
+                            <label>
+                                <input type="radio" name="province"/> A CORUÑA
+                            </label>
+                            <label>
+                                <input type="radio" name="province"/> OURENSE
+                            </label>
+                            <label>
+                                <input type="radio" name="province"/> PONTEVEDRA
+                            </label>
                         </fieldset>
+                        }
                     </fieldset>                    
                 </fieldset>
                 <label>
