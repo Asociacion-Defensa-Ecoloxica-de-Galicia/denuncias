@@ -5,37 +5,66 @@ import { useEffect, useState } from "react";
 
 function ComplaintForm() {
 
+
     const [ legislation, setLegislation ] = useState(new Set())
-    const [ institution, setInstitution ] = useState("")
     const [ isTerritorial , setIsTerritorial ] = useState(false)
-    const [ province, setProvince ] = useState("")
-    const [ formData, setFormData ] = useState({})
-    const [isOtherChecked, setIsOtherChecked] = useState(false)
+    const formDataState = useState({})
+    const [ formData, setFormData ] = formDataState
+    const [ isOtherChecked, setIsOtherChecked ] = useState(false)
 
     useEffect(
         ()=>{
             formData.legislation = Array.from(legislation)
-            setIsOtherChecked(formData?.legislation?.includes("outros"))
-            console.log (formData.legislation)
+            setIsOtherChecked(formData?.legislation?.includes("Outros"))
         },
         [legislation]
     );
 
-    function formInputHandler(event){
-        const territorial = event.target.classList.contains("territorial")
-        if ( event.target.name === "institution" ) {
-            setInstitution(event.target.labels[0].innerText)
-            setIsTerritorial( territorial )
-            if ( ! territorial ) setProvince("")
+    useEffect(
+        ()=>{
+            console.log(formData)
+        },
+        [formData]
+    );
+
+    function saveDataInObject(objectState, attribute, formValue) {
+        const [object, objectSetter] = objectState
+        const newObject = {...object}
+        newObject[attribute] = formValue
+        objectSetter(newObject)
+    }
+
+    function handlerCheckExtraDoc(event){
+        if (event.target.checked === true) {
+            saveDataInObject(formDataState, "extraDocumentation", true)
+        } else if (event.target.checked === false){
+            saveDataInObject(formDataState, "extraDocumentation", false)
         }
-        if ( event.target.name === "province" ) setProvince(event.target.labels[0].innerText)
+    };
+
+    function formInputHandler(event){
+        if ( event.target.name === "institution" ) {
+            const territorial = event.target.classList.contains("territorial")
+            saveDataInObject(formDataState, "instituion", event.target.labels[0].innerText)
+            setIsTerritorial( territorial )
+            if ( ! territorial ) saveDataInObject(formDataState, "institutionProvince", "")
+        }
+        if ( event.target.name === "institution-province" ) saveDataInObject(formDataState, "institutionProvince", event.target.labels[0].innerText)
+        if ( event.target.name === "adega-code" ) saveDataInObject(formDataState, "adegaCode", event.target.value)
+        if ( event.target.name === "issue" ) saveDataInObject(formDataState, "issue", event.target.value)
+        if ( event.target.name === "complaint-details" ) saveDataInObject(formDataState, "complaintDetails", event.target.value)
+        if ( event.target.name === "zone" ) saveDataInObject(formDataState, "zone", event.target.value)
+        if ( event.target.name === "allotment" ) saveDataInObject(formDataState, "allotment", event.target.value)
+        if ( event.target.name === "municipality" ) saveDataInObject(formDataState, "municipality", event.target.value)
+        if ( event.target.name === "other-legislation" ) saveDataInObject(formDataState, "otherLegislation", event.target.value)
+        if ( event.target.name === "province-of-complaint" ) saveDataInObject(formDataState, "provinceOfComplaint", event.target.labels[0].innerText)
     }
 
     return(
         <>
             <form onInput={formInputHandler}>
                 <label>Codigo de ADEGA:
-                        DF<input type="text"/>
+                        DF<input type="text" name="adega-code"/>
                 </label>
 
                 <label>Asunto Relacionado
@@ -45,7 +74,8 @@ function ComplaintForm() {
                 <label>Recentemente, membros de ADEGA detectaron:
                     <textarea 
                         cols="60" 
-                        rows="10" 
+                        rows="10"
+                        name="complaint-details" 
                         placeholder="Incluír a data aproximada, unha descrición dos feitos denunciados, e indicar a referencia catastral e/ou cordeadas X/Y se as houbese"
                     />
                 </label>
@@ -54,29 +84,29 @@ function ComplaintForm() {
                     <legend>Datos da ubicación</legend>
                     <label>
                         Polígono: 
-                        <input type="text"/>
+                        <input type="text" name="zone"/>
                     </label>
                     <label>
                         Parcela: 
-                        <input type="text"/>
+                        <input type="text" name="allotment"/>
                     </label>
                     <label>
                         Concello:
-                        <input type="text"/>
+                        <input type="text" name="municipality"/>
                     </label>
                     <fieldset>
                             <legend>Provincia</legend>
                             <label>
-                                <input type="radio" name="province"/> LUGO
+                                <input type="radio" name="province-of-complaint"/> LUGO
                             </label>
                             <label>
-                                <input type="radio" name="province"/> A CORUÑA
+                                <input type="radio" name="province-of-complaint"/> A CORUÑA
                             </label>
                             <label>
-                                <input type="radio" name="province"/> OURENSE
+                                <input type="radio" name="province-of-complaint"/> OURENSE
                             </label>
                             <label>
-                                <input type="radio" name="province"/> PONTEVEDRA
+                                <input type="radio" name="province-of-complaint"/> PONTEVEDRA
                             </label>
                         </fieldset>
                 </fieldset>
@@ -158,9 +188,10 @@ function ComplaintForm() {
                         name="legislation" value="outros" legislation={legislation} setLegislation={setLegislation}
                     />
                     {isOtherChecked && 
-                        <textarea 
+                        <textarea
                             cols="60" 
-                            rows="5" 
+                            rows="5"
+                            name="other-legislation"
                             placeholder="Escriba aquí a lexislación"
                         />
                     }
@@ -203,23 +234,23 @@ function ComplaintForm() {
                         <fieldset>
                             <legend>Provincia</legend>
                             <label>
-                                <input type="radio" name="province"/> LUGO
+                                <input type="radio" name="institution-province"/> LUGO
                             </label>
                             <label>
-                                <input type="radio" name="province"/> A CORUÑA
+                                <input type="radio" name="institution-province"/> A CORUÑA
                             </label>
                             <label>
-                                <input type="radio" name="province"/> OURENSE
+                                <input type="radio" name="institution-province"/> OURENSE
                             </label>
                             <label>
-                                <input type="radio" name="province"/> PONTEVEDRA
+                                <input type="radio" name="institution-province"/> PONTEVEDRA
                             </label>
                         </fieldset>
                         }
                     </fieldset>                    
                 </fieldset>
                 <label>
-                    <input type="checkbox" value="extra_doc"/>
+                    <input onClick={handlerCheckExtraDoc} type="checkbox" name="extra-documentation"/>
                     Acómpañase outra Documentación
                 </label>
                 
