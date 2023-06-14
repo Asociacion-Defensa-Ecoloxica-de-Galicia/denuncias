@@ -1,6 +1,5 @@
 function InputCheckbox({labelText, name, value, legislation, setLegislation}){
 
-    const shownText = labelText
 
     function handlerCheckLegislation(event){
         if (event.target.checked === true) {
@@ -21,7 +20,7 @@ function InputCheckbox({labelText, name, value, legislation, setLegislation}){
                 name={name} 
                 value={value} 
             />
-            {shownText}  
+            {labelText}  
         </label>
     );
 };

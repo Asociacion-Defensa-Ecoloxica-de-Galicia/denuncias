@@ -20,44 +20,40 @@ function ComplaintForm() {
         [legislation]
     );
 
-    useEffect(
-        ()=>{
-            console.log(formData)
-        },
-        [formData]
-    );
-
-    function saveDataInObject(objectState, attribute, formValue) {
-        const [object, objectSetter] = objectState
-        const newObject = {...object}
-        newObject[attribute] = formValue
-        objectSetter(newObject)
+    function saveToStatePropertyFactory(objectState){
+        return function (attribute, formValue) {
+            const [object, objectSetter] = objectState
+            const newObject = {...object}
+            newObject[attribute] = formValue
+            objectSetter(newObject)
+        }
     }
 
-    function handlerCheckExtraDoc(event){
-        if (event.target.checked === true) {
-            saveDataInObject(formDataState, "extraDocumentation", true)
-        } else if (event.target.checked === false){
-            saveDataInObject(formDataState, "extraDocumentation", false)
-        }
-    };
+    const saveDataInObject = saveToStatePropertyFactory(formDataState)
 
     function formInputHandler(event){
         if ( event.target.name === "institution" ) {
             const territorial = event.target.classList.contains("territorial")
-            saveDataInObject(formDataState, "instituion", event.target.labels[0].innerText)
+            saveDataInObject("instituion", event.target.labels[0].innerText)
             setIsTerritorial( territorial )
-            if ( ! territorial ) saveDataInObject(formDataState, "institutionProvince", "")
+            if ( ! territorial ) saveDataInObject("institutionProvince", "")
         }
-        if ( event.target.name === "institution-province" ) saveDataInObject(formDataState, "institutionProvince", event.target.labels[0].innerText)
-        if ( event.target.name === "adega-code" ) saveDataInObject(formDataState, "adegaCode", event.target.value)
-        if ( event.target.name === "issue" ) saveDataInObject(formDataState, "issue", event.target.value)
-        if ( event.target.name === "complaint-details" ) saveDataInObject(formDataState, "complaintDetails", event.target.value)
-        if ( event.target.name === "zone" ) saveDataInObject(formDataState, "zone", event.target.value)
-        if ( event.target.name === "allotment" ) saveDataInObject(formDataState, "allotment", event.target.value)
-        if ( event.target.name === "municipality" ) saveDataInObject(formDataState, "municipality", event.target.value)
-        if ( event.target.name === "other-legislation" ) saveDataInObject(formDataState, "otherLegislation", event.target.value)
-        if ( event.target.name === "province-of-complaint" ) saveDataInObject(formDataState, "provinceOfComplaint", event.target.labels[0].innerText)
+        if ( event.target.name === "extra-documnetation"){
+            if (event.target.checked === true) {
+                saveDataInObject("extraDocumentation", true)
+            } else if (event.target.checked === false){
+                saveDataInObject("extraDocumentation", false)
+            }
+        }
+        if ( event.target.name === "institution-province" ) saveDataInObject("institutionProvince", event.target.labels[0].innerText)
+        if ( event.target.name === "adega-code" ) saveDataInObject("adegaCode", event.target.value)
+        if ( event.target.name === "issue" ) saveDataInObject("issue", event.target.value)
+        if ( event.target.name === "complaint-details" ) saveDataInObject("complaintDetails", event.target.value)
+        if ( event.target.name === "zone" ) saveDataInObject("zone", event.target.value)
+        if ( event.target.name === "allotment" ) saveDataInObject("allotment", event.target.value)
+        if ( event.target.name === "municipality" ) saveDataInObject("municipality", event.target.value)
+        if ( event.target.name === "other-legislation" ) saveDataInObject("otherLegislation", event.target.value)
+        if ( event.target.name === "province-of-complaint" ) saveDataInObject("provinceOfComplaint", event.target.labels[0].innerText)
     }
 
     return(
@@ -250,7 +246,7 @@ function ComplaintForm() {
                     </fieldset>                    
                 </fieldset>
                 <label>
-                    <input onClick={handlerCheckExtraDoc} type="checkbox" name="extra-documentation"/>
+                    <input type="checkbox" name="extra-documentation"/>
                     Acómpañase outra Documentación
                 </label>
                 
