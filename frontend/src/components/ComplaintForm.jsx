@@ -16,12 +16,19 @@ function ComplaintForm() {
 
     useEffect(
         ()=>{
-            formData.legislationSection1 = Array.from(legislationSection1)
-            formData.legislationSection2 = Array.from(legislationSection2)
-            setIsOtherChecked(formData?.legislationSection2?.includes("Outros"))
-            console.log("S1: ", legislationSection1, "S2: ", legislationSection2);
+            saveDataInObject("legislationSection1", Array.from(legislationSection1)) 
+            console.log("S1: ", formData.legislationSection1, "S2: ", formData.legislationSection2);
         },
-        [legislationSection1, legislationSection2]
+        [legislationSection1]
+    );
+
+    useEffect(
+        ()=>{
+            saveDataInObject("legislationSection2", Array.from(legislationSection2)) 
+            setIsOtherChecked(formData?.legislationSection2?.includes("Outros"))
+            console.log("S1: ", formData.legislationSection1, "S2: ", formData.legislationSection2);
+        },
+        [legislationSection2]
     );
 
     function saveToStatePropertyFactory(objectState){
@@ -256,7 +263,7 @@ function ComplaintForm() {
                 
 
             </form>
-            <PdfBuilder formDataState={formDataState}/>
+            <PdfBuilder formDataState={formDataState} isOtherChecked={isOtherChecked}/>
         </>
 
         
