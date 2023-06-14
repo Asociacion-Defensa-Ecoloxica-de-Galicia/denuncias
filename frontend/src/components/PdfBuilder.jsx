@@ -24,7 +24,7 @@ function PdfBuilder({formDataState, isOtherChecked}) {
                     <p>{formData.issue}</p>
                 </section>
                 <section>
-                    <h2>Expón (máx. 1995 caracteres, senón a denuncia ten que ir apegada)</h2>
+                    <h2>Expón:</h2>
                     <p>
                         Recentemente, membros de ADEGA detectaron {formData.complaintDetails}, no polígono {formData.zone} 
                         Parcela {formData.allotment} no Concello de {formData.municipality} 

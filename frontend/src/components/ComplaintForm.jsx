@@ -84,6 +84,7 @@ function ComplaintForm() {
                         rows="10"
                         name="complaint-details" 
                         placeholder="Incluír a data aproximada, unha descrición dos feitos denunciados, e indicar a referencia catastral e/ou cordeadas X/Y se as houbese"
+                        maxLength={1995}
                     />
                 </label>
                     
