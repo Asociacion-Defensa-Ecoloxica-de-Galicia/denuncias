@@ -26,7 +26,6 @@ function ComplaintForm() {
         ()=>{
             saveDataInObject("legislationSection2", Array.from(legislationSection2)) 
             setIsOtherChecked(formData?.legislationSection2?.includes("Outros"))
-            console.log("S1: ", formData.legislationSection1, "S2: ", formData.legislationSection2);
         },
         [legislationSection2]
     );
