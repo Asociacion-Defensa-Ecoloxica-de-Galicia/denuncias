@@ -44,7 +44,7 @@ function ComplaintForm() {
     function formInputHandler(event){
         if ( event.target.name === "institution" ) {
             const territorial = event.target.classList.contains("territorial")
-            saveDataInObject("instituion", event.target.labels[0].innerText)
+            saveDataInObject("institution", event.target.labels[0].innerText)
             setIsTerritorial( territorial )
             if ( ! territorial ) saveDataInObject("institutionProvince", "")
         }

@@ -8,7 +8,6 @@ function PdfBuilder({formDataState}) {
     const [ formData, setFormData ] = formDataState
     const source = useRef()
     const otherLegislations = formData?.otherLegislation?.split("\n")
-    console.log(otherLegislations);
 
     function renderHandler() {
         html2pdf(source.current)
@@ -26,9 +25,7 @@ function PdfBuilder({formDataState}) {
                 <section>
                     <h2>Expón:</h2>
                     <p>
-                        Recentemente, membros de ADEGA detectaron&#160;{formData.complaintDetails}, no polígono&#160;{formData.zone} 
-                        &#160;Parcela&#160;{formData.allotment}&#160;no Concello de&#160;{formData.municipality} 
-                        &#160;na Provincia da&#160;{formData.provinceOfComplaint},
+                        Recentemente, membros de ADEGA detectaron {formData.complaintDetails}, no polígono {formData.zone} Parcela {formData.allotment} no Concello de {formData.municipality} na Provincia de {formData.provinceOfComplaint},
                     </p>
                 </section>
                 <section>
@@ -50,7 +47,7 @@ function PdfBuilder({formDataState}) {
                             )
                         }
                         {formData.isOtherLegislationChecked && 
-                            otherLegislations.map (
+                            otherLegislations?.map (
                                 (otherLegislation, idx)=><li key={idx}>{otherLegislation}</li>
                             )
                         }
@@ -64,10 +61,14 @@ function PdfBuilder({formDataState}) {
                         Que se investigue a situación de legalidade das parcelas estremeiras ou próximas ás denunciadas e, no seu caso, se realice a pertinente denuncia de oficio.
                     </p>
                 </section>
-                {formData.extraDocumentation && <p>Acompáñase outra documentación</p>}
-            </div>
-            
 
+                {formData.extraDocumentation && <p>Acompáñase outra documentación</p>}
+
+                <span>Dirixido a {formData?.institution}</span>
+                {formData?.institutionProvince && 
+                    <span> - XEFATURA TERRITORIAL DE{formData?.institutionProvince}</span>
+                }
+            </div>
         </template>
         <button onClick={renderHandler}>Imprimir documento</button>
         </>
