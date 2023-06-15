@@ -7,6 +7,8 @@ function PdfBuilder({formDataState}) {
 
     const [ formData, setFormData ] = formDataState
     const source = useRef()
+    const otherLegislations = formData.otherLegislation.split("\n")
+    console.log(otherLegislations);
 
     function renderHandler() {
         html2pdf(source.current)
@@ -19,14 +21,14 @@ function PdfBuilder({formDataState}) {
                 <h2>Cód. De ADEGA: DF{formData.adegaCode}</h2>
                 <section>
                     <h2>Asunto relacionado</h2>
-                    <p>{formData.issue}</p>
+                    <p className={style.issue}>{formData.issue}</p>
                 </section>
                 <section>
                     <h2>Expón:</h2>
                     <p>
-                        Recentemente, membros de ADEGA detectaron {formData.complaintDetails}, no polígono {formData.zone} 
-                        &#160;Parcela {formData.allotment} &#160;no Concello de {formData.municipality} 
-                        &#160;na Provincia da {formData.provinceOfComplaint},
+                        Recentemente, membros de ADEGA detectaron&#160;{formData.complaintDetails}, no polígono&#160;{formData.zone} 
+                        &#160;Parcela&#160;{formData.allotment}&#160;no Concello de&#160;{formData.municipality} 
+                        &#160;na Provincia da&#160;{formData.provinceOfComplaint},
                     </p>
                 </section>
                 <section>
@@ -47,7 +49,11 @@ function PdfBuilder({formDataState}) {
                                 (legislationS2,idx)=><li key={idx}>{legislationS2}</li>
                             )
                         }
-                        {formData.isOtherLegislationChecked && <li>{formData.otherLegislation}</li>}
+                        {formData.isOtherLegislationChecked && 
+                            otherLegislations.map (
+                                (otherLegislation, idx)=><li key={idx}>{otherLegislation}</li>
+                            )
+                        }
                     </ul>
                 </section>
                 <section>
