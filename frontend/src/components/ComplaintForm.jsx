@@ -28,6 +28,13 @@ function ComplaintForm() {
         [legislationSection2]
     );
 
+    useEffect(
+        ()=>{
+            if ( ! isTerritorial) saveDataInObject("institutionProvince", "")
+        },
+        [isTerritorial]
+    )
+
     function saveToStatePropertyFactory(objectState){
         return function (attribute, formValue) {
             const [object, objectSetter] = objectState
@@ -46,7 +53,6 @@ function ComplaintForm() {
             const territorial = event.target.classList.contains("territorial")
             saveDataInObject("institution", event.target.labels[0].innerText)
             setIsTerritorial( territorial )
-            if ( ! territorial ) saveDataInObject("institutionProvince", "")
         }
         if ( event.target.name === "check-other-legislation" ) {
             if (event.target.checked === true) {
