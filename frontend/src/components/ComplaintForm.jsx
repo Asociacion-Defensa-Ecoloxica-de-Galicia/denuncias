@@ -17,7 +17,6 @@ function ComplaintForm() {
     useEffect(
         ()=>{
             saveDataInObject("legislationSection1", Array.from(legislationSection1)) 
-            console.log("S1: ", formData.legislationSection1, "S2: ", formData.legislationSection2);
         },
         [legislationSection1]
     );
@@ -25,8 +24,6 @@ function ComplaintForm() {
     useEffect(
         ()=>{
             saveDataInObject("legislationSection2", Array.from(legislationSection2)) 
-            setIsOtherChecked(formData?.legislationSection2?.includes("Outros"))
-            console.log("S1: ", formData.legislationSection1, "S2: ", formData.legislationSection2);
         },
         [legislationSection2]
     );
@@ -40,6 +37,8 @@ function ComplaintForm() {
         }
     }
 
+
+
     const saveDataInObject = saveToStatePropertyFactory(formDataState)
 
     function formInputHandler(event){
@@ -49,7 +48,16 @@ function ComplaintForm() {
             setIsTerritorial( territorial )
             if ( ! territorial ) saveDataInObject("institutionProvince", "")
         }
-        if ( event.target.name === "extra-documnetation"){
+        if ( event.target.name === "check-other-legislation" ) {
+            if (event.target.checked === true) {
+                setIsOtherChecked(true)
+                saveDataInObject("isOtherLegislationChecked", true)
+            } else if (event.target.checked === false){
+                setIsOtherChecked(false)
+                saveDataInObject("isOtherLegislationChecked", false)
+            }
+        }
+        if ( event.target.name === "extra-documentation"){
             if (event.target.checked === true) {
                 saveDataInObject("extraDocumentation", true)
             } else if (event.target.checked === false){
@@ -190,10 +198,10 @@ function ComplaintForm() {
                         labelText="Lei 45/2007 Desarrollo sostenible del medio rural"
                         name="legislation" value="lei45_2007" legislation={legislationSection2} setLegislation={setLegislationSection2}
                     />
-                    <InputCheckbox
-                        labelText="Outros"
-                        name="legislation" value="outros" legislation={legislationSection2} setLegislation={setLegislationSection2}
-                    />
+                    <label>
+                        <input type="checkbox" name="check-other-legislation"/>
+                        Outros
+                    </label>
                     {isOtherChecked && 
                         <textarea
                             cols="60" 
@@ -263,7 +271,7 @@ function ComplaintForm() {
                 
 
             </form>
-            <PdfBuilder formDataState={formDataState} isOtherChecked={isOtherChecked}/>
+            <PdfBuilder formDataState={formDataState}/>
         </>
 
         
