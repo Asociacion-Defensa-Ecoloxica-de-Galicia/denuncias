@@ -7,7 +7,7 @@ function PdfBuilder({formDataState}) {
 
     const [ formData, setFormData ] = formDataState
     const source = useRef()
-    const otherLegislations = formData.otherLegislation.split("\n")
+    const otherLegislations = formData?.otherLegislation?.split("\n")
     console.log(otherLegislations);
 
     function renderHandler() {
