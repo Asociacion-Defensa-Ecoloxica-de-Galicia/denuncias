@@ -3,12 +3,11 @@ import html2pdf from "html2pdf.js"
 import style from "./PdfBuilder.module.css"
 
 
-function PdfBuilder({formDataState, isOtherChecked}) {
+function PdfBuilder({formDataState}) {
 
     const [ formData, setFormData ] = formDataState
-    console.log(formData?.legislationSection1, formData?.legislationSection2);
-
     const source = useRef()
+    const otherLegislations = formData?.otherLegislation?.split("\n")
 
     function renderHandler() {
         html2pdf(source.current)
@@ -21,14 +20,12 @@ function PdfBuilder({formDataState, isOtherChecked}) {
                 <h2>Cód. De ADEGA: DF{formData.adegaCode}</h2>
                 <section>
                     <h2>Asunto relacionado</h2>
-                    <p>{formData.issue}</p>
+                    <p className={style.issue}>{formData.issue}</p>
                 </section>
                 <section>
                     <h2>Expón:</h2>
                     <p>
-                        Recentemente, membros de ADEGA detectaron {formData.complaintDetails}, no polígono {formData.zone} 
-                        Parcela {formData.allotment} no Concello de {formData.municipality} 
-                        na Provincia da {formData.provinceOfComplaint},
+                        Recentemente, membros de ADEGA detectaron {formData.complaintDetails}, no polígono {formData.zone} Parcela {formData.allotment} no Concello de {formData.municipality} na Provincia de {formData.provinceOfComplaint},
                     </p>
                 </section>
                 <section>
@@ -49,12 +46,29 @@ function PdfBuilder({formDataState, isOtherChecked}) {
                                 (legislationS2,idx)=><li key={idx}>{legislationS2}</li>
                             )
                         }
-                        {isOtherChecked && <li>{formData.otherLegislation}</li>}
+                        {formData.isOtherLegislationChecked && 
+                            otherLegislations?.map (
+                                (otherLegislation, idx)=><li key={idx}>{otherLegislation}</li>
+                            )
+                        }
                     </ul>
                 </section>
-            </div>
-            
+                <section>
+                    <h2>Solicita:</h2>
+                    <p>
+                        Que se comproben os feitos denunciados e se aplique o réxime sancionador previsto nas citadas leis, esixindo en todo caso a obriga de reparación do dano para devolver o espazo afectado ao seu estado primitivo
+                        Que se informe en tempo e forma a esta entidade das medidas ou actuacións derivadas da presente denuncia.
+                        Que se investigue a situación de legalidade das parcelas estremeiras ou próximas ás denunciadas e, no seu caso, se realice a pertinente denuncia de oficio.
+                    </p>
+                </section>
 
+                {formData.extraDocumentation && <p>Acompáñase outra documentación</p>}
+
+                <span>Dirixido a {formData?.institution}</span>
+                {formData?.institutionProvince && 
+                    <span> - XEFATURA TERRITORIAL DE{formData?.institutionProvince}</span>
+                }
+            </div>
         </template>
         <button onClick={renderHandler}>Imprimir documento</button>
         </>
