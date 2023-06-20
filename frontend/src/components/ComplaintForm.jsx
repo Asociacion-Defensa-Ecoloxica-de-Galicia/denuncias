@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import InputCheckbox from "./InputCheckbox";
 import PdfBuilder from "./PdfBuilder";
+//import municipalities from "../lib/municipalites.json" assert { type: "json" }
 import styles from "./ComplaintForm.module.css"
 
 
