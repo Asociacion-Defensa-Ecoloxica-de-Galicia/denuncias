@@ -15,6 +15,6 @@ RUN rm /usr/src/app/* -rf
 RUN apk del npm
 RUN rm -rf /var/cache/apk
 
-EXPOSE 80
+EXPOSE ${PORT}
 
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
