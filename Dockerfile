@@ -1,7 +1,6 @@
 FROM alpine:latest
-RUN apk update \
-    && apk add lighttpd \
-    && rm -rf /var/cache/apk
+RUN apk update
+RUN apk add lighttpd npm
 
 WORKDIR /usr/src/app/
 COPY . .
@@ -9,9 +8,11 @@ COPY . .
 WORKDIR /usr/src/app/frontend
 RUN npm install
 RUN npm run build
-COPY /usr/src/app/frontend/dist/* /var/www/localhost/htdocs
+RUN cp -a /usr/src/app/frontend/dist/* /var/www/localhost/htdocs
+
 WORKDIR /usr/src/app/
 RUN rm /usr/src/app/* -rf
-
+RUN apk del npm
+RUN rm -rf /var/cache/apk
 
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
