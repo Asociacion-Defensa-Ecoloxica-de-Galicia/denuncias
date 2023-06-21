@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import InputCheckbox from "./InputCheckbox";
 import PdfBuilder from "./PdfBuilder";
-//import municipalities from "../lib/municipalites.json" assert { type: "json" }
+import { municipalities } from "../lib/municipalities.mjs"
 import styles from "./ComplaintForm.module.css"
 
 
@@ -11,6 +11,7 @@ function ComplaintForm() {
     const [ legislationSection1, setLegislationSection1 ] = useState(new Set())
     const [ legislationSection2, setLegislationSection2 ] = useState(new Set())
     const [ isTerritorial , setIsTerritorial ] = useState(false)
+    const [ provinceOfComplaint, setProvinceOfComplaint ] = useState("")
     const formDataState = useState({})
     const [ formData, setFormData ] = formDataState
     const [ isOtherChecked, setIsOtherChecked ] = useState(false)
@@ -34,6 +35,12 @@ function ComplaintForm() {
             if ( ! isTerritorial) saveDataInObject("institutionProvince", "")
         },
         [isTerritorial]
+    )
+    useEffect(
+        ()=>{
+            saveDataInObject("provinceOfComplaint", provinceOfComplaint)
+        },
+        [provinceOfComplaint]
     )
 
     function saveToStatePropertyFactory(objectState){
@@ -71,15 +78,18 @@ function ComplaintForm() {
                 saveDataInObject("extraDocumentation", false)
             }
         }
+        if ( event.target.name === "municipality" ) {
+            saveDataInObject("municipality", event.target.value)
+            const selectedOption = document.querySelector(`option[value='${event.target.value}']`)
+            setProvinceOfComplaint(selectedOption?.dataset.province)
+        }
         if ( event.target.name === "institution-province" ) saveDataInObject("institutionProvince", event.target.labels[0].innerText)
         if ( event.target.name === "adega-code" ) saveDataInObject("adegaCode", event.target.value)
         if ( event.target.name === "issue" ) saveDataInObject("issue", event.target.value)
         if ( event.target.name === "complaint-details" ) saveDataInObject("complaintDetails", event.target.value)
         if ( event.target.name === "zone" ) saveDataInObject("zone", event.target.value)
         if ( event.target.name === "allotment" ) saveDataInObject("allotment", event.target.value)
-        if ( event.target.name === "municipality" ) saveDataInObject("municipality", event.target.value)
         if ( event.target.name === "other-legislation" ) saveDataInObject("otherLegislation", event.target.value)
-        if ( event.target.name === "province-of-complaint" ) saveDataInObject("provinceOfComplaint", event.target.labels[0].innerText)
     }
 
     return(
@@ -115,9 +125,23 @@ function ComplaintForm() {
                     </label>
                     <label>
                         Concello:
-                        <input type="text" name="municipality"/>
+                        <input list="municipalities" name="municipality"/>
+                        <datalist id="municipalities">
+                            {
+                                municipalities.map (
+                                    (municipality, idx) => 
+                                        <option 
+                                            key={idx} 
+                                            data-province={municipality.province}
+                                            value={municipality.name}
+                                        />
+                                )
+                            }
+                        </datalist>
                     </label>
-                    <fieldset>
+                    <p>Provincia de {provinceOfComplaint}</p>
+                        {/*
+                        <fieldset>
                             <legend>Provincia</legend>
                             <label>
                                 <input type="radio" name="province-of-complaint"/> LUGO
@@ -132,6 +156,7 @@ function ComplaintForm() {
                                 <input type="radio" name="province-of-complaint"/> PONTEVEDRA
                             </label>
                         </fieldset>
+                        */}
                 </fieldset>
 
                 <fieldset>
