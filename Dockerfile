@@ -16,5 +16,6 @@ RUN apk del npm
 RUN rm -rf /var/cache/apk
 
 EXPOSE ${PORT}
+RUN echo "server.port = env.PORT" >> /etc/lighttpd/lighttpd.conf
 
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
