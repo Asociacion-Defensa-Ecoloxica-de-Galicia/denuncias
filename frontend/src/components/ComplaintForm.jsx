@@ -52,8 +52,6 @@ function ComplaintForm() {
         }
     }
 
-
-
     const saveDataInObject = saveToStatePropertyFactory(formDataState)
 
     function formInputHandler(event){
@@ -140,23 +138,6 @@ function ComplaintForm() {
                         </datalist>
                     </label>
                     <p>Provincia de {provinceOfComplaint}</p>
-                        {/*
-                        <fieldset>
-                            <legend>Provincia</legend>
-                            <label>
-                                <input type="radio" name="province-of-complaint"/> LUGO
-                            </label>
-                            <label>
-                                <input type="radio" name="province-of-complaint"/> A CORUÑA
-                            </label>
-                            <label>
-                                <input type="radio" name="province-of-complaint"/> OURENSE
-                            </label>
-                            <label>
-                                <input type="radio" name="province-of-complaint"/> PONTEVEDRA
-                            </label>
-                        </fieldset>
-                        */}
                 </fieldset>
 
                 <fieldset>
