@@ -1,7 +1,5 @@
-import { app } from "./api.mjs"
-import { URL } from "./config.mjs";
-import "./controllers/root.mjs"
+import { app } from "./express.mjs"
 
-app.listen(process.env.PORT, ()=>{
-    console.log("Backend running at:", URL);
+app.listen(process.env.PORT ?? 8000 , ()=>{
+    console.log("Backend running 👍");
 })
