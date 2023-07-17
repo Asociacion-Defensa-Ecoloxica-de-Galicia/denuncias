@@ -12,3 +12,7 @@ async function todosOsArtigosLeiDeMontes(peticion, resposta) {
         resposta.sendStatus(500)
     }
 }
+
+export{
+    todosOsArtigosLeiDeMontes
+}
