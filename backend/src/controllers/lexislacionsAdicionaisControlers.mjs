@@ -2,7 +2,6 @@
 
 /** @type {RequestHandler} */
 async function todasAsLexislacionsAdicionais(peticion, resposta) {
-    // TODO: Obter lista de todalas lexislacions adicionais e entrgala como JSON
     try {
         const artigosOutrasNormativas = await OutrasNormativas.findAll();
         resposta.json(artigosOutrasNormativas);
