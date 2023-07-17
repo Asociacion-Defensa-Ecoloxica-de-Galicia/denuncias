@@ -1,5 +1,7 @@
 /** @typedef {import("express").RequestHandler} RequestHandler */
 
+import { OutrasNormativas } from "../db.mjs";
+
 /** @type {RequestHandler} */
 async function todasAsLexislacionsAdicionais(peticion, resposta) {
     try {
