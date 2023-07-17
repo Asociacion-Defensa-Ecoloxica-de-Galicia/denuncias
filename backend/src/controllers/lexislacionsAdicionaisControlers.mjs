@@ -1,8 +1,15 @@
 /** @typedef {import("express").RequestHandler} RequestHandler */
 
 /** @type {RequestHandler} */
-function todasAsLexislacionsAdicionais(peticion, resposta) {
-    // TODO: Obter lista de todalas lexislacions adicionais e entrgala como JSON
+async function todasAsLexislacionsAdicionais(peticion, resposta) {
+    try {
+        const artigosOutrasNormativas = await OutrasNormativas.findAll();
+        resposta.json(artigosOutrasNormativas);
+    } catch (error) {
+        console.error(error);
+        console.status(500);
+        console.send("Error al obtener las normativas");
+    }
 }
 
 export {
